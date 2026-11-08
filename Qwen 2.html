@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КодКидс - Клуб программирования, робототехники и 3D-моделирования для детей</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #495d8b;
+            --primary-light: #6b7fad;
+            --secondary: #a8c5e8;
+            --accent: #495d8b;
+            --white: #ffffff;
+            --light-bg: #f8f9fc;
+            --text-dark: #2c3e50;
+            --text-light: #5a6c7d;
+            --shadow: rgba(73, 93, 139, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Pacifico', cursive;
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.8rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--light-bg) 0%, #e8f0f8 100%);
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background: var(--secondary);
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(73, 93, 139, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(73, 93, 139, 0.4);
+        }
+
+        .hero-image {
+            position: relative;
+            height: 400px;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-image svg {
+            width: 80%;
+            height: 80%;
+        }
+
+        /* Advantages */
+        .advantages {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .advantage-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--light-bg);
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .advantage-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        .advantage-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Gallery */
+        .gallery {
+            padding: 4rem 0;
+            background: var(--light-bg);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--white);
+        }
+
+        .gallery-content {
+            padding: 1.5rem;
+        }
+
+        .gallery-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.2;
+            font-family: serif;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .testimonial-author {
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--light-bg) 0%, #e8f0f8 100%);
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group input.error,
+        .form-group textarea.error {
+            border-color: #e74c3c;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            margin-top: 0.3rem;
+        }
+
+        .checkbox-group label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .faq-item {
+            background: var(--light-bg);
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #e8f0f8;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #b0b0b0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #3d4f63;
+            color: #b0b0b0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 5px 10px var(--shadow);
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-image {
+                height: 300px;
+            }
+
+            .form-container {
+                padding: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">КодКидс</a>
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <nav>
+                    <ul id="navMenu">
+                        <li><a href="#advantages">Преимущества</a></li>
+                        <li><a href="#gallery">Галерея</a></li>
+                        <li><a href="#testimonials">Отзывы</a></li>
+                        <li><a href="#faq">Вопросы</a></li>
+                        <li><a href="#form">Записаться</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Будущее начинается здесь</h1>
+                    <p>Программирование, робототехника и 3D-моделирование для детей 6-17 лет. Раскройте талант вашего ребенка в мире технологий!</p>
+                    <button class="btn" onclick="scrollToForm()">Записаться на пробное занятие</button>
+                </div>
+                <div class="hero-image">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="80" r="30" fill="#495d8b"/>
+                        <rect x="70" y="110" width="60" height="50" rx="5" fill="#6b7fad"/>
+                        <circle cx="85" cy="75" r="5" fill="#fff"/>
+                        <circle cx="115" cy="75" r="5" fill="#fff"/>
+                        <rect x="80" y="130" width="15" height="15" fill="#a8c5e8"/>
+                        <rect x="105" y="130" width="15" height="15" fill="#a8c5e8"/>
+                        <rect x="50" y="160" width="100" height="10" rx="5" fill="#495d8b"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages -->
+    <section class="advantages" id="advantages">
+        <div class="container">
+            <h2 class="section-title">Почему выбирают нас</h2>
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">👨‍🏫</div>
+                    <h3>Опытные педагоги</h3>
+                    <p>Сертифицированные преподаватели с опытом работы с детьми</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">💻</div>
+                    <h3>Современное оборудование</h3>
+                    <p>Новейшие компьютеры, роботы и 3D-принтеры</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">🎯</div>
+                    <h3>Индивидуальный подход</h3>
+                    <p>Малые группы до 8 человек для каждого ученика</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">🏆</div>
+                    <h3>Реальные проекты</h3>
+                    <p>Дети создают работающие программы и роботов</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">📈</div>
+                    <h3>Развитие навыков</h3>
+                    <p>Логика, креативность и технические компетенции</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Наши занятия</h2>
+            <div class="gallery-grid">
+                <div class="gallery-card">
+                    <div class="gallery-image">🎮</div>
+                    <div class="gallery-content">
+                        <h3>Создание игр</h3>
+                        <p>Разработка компьютерных игр с нуля</p>
+                    </div>
+                </div>
+                <div class="gallery-card">
+                    <div class="gallery-image">🤖</div>
+                    <div class="gallery-content">
+                        <h3>Робототехника</h3>
+                        <p>Конструирование и программирование роботов</p>
+                    </div>
+                </div>
+                <div class="gallery-card">
+                    <div class="gallery-image">🎨</div>
+                    <div class="gallery-content">
+                        <h3>3D-моделирование</h3>
+                        <p>Создание трехмерных объектов и анимаций</p>
+                    </div>
+                </div>
+                <div class="gallery-card">
+                    <div class="gallery-image">🌐</div>
+                    <div class="gallery-content">
+                        <h3>Веб-разработка</h3>
+                        <p>Создание сайтов и веб-приложений</p>
+                    </div>
+                </div>
+                <div class="gallery-card">
+                    <div class="gallery-image">📱</div>
+                    <div class="gallery-content">
+                        <h3>Мобильные приложения</h3>
+                        <p>Разработка приложений для смартфонов</p>
+                    </div>
+                </div>
+                <div class="gallery-card">
+                    <div class="gallery-image">🔬</div>
+                    <div class="gallery-content">
+                        <h3>Научные проекты</h3>
+                        <p>Исследования и эксперименты в IT</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Отзывы родителей</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Сын в восторге от занятий! Уже создал свою первую игру. Преподаватели находят подход к каждому ребенку.</p>
+                    <p class="testimonial-author">Анна, мама Миши (9 лет)</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Дочка научилась программировать роботов за 3 месяца. Теперь мечтает стать инженером!</p>
+                    <p class="testimonial-author">Дмитрий, папа Софии (11 лет)</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Отличная атмосфера и профессиональные педагоги. Ребенок с удовольствием ходит на занятия.</p>
+                    <p class="testimonial-author">Елена, мама Артема (7 лет)</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Сын создает 3D-модели и печатает их на принтере. Это развивает не только технические навыки, но и креативность.</p>
+                    <p class="testimonial-author">Ольга, мама Кирилла (13 лет)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section" id="form">
+        <div class="container">
+            <div class="form-container">
+                <h2 class="section-title">Записаться на пробное занятие</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Имя родителя *</label>
+                        <input type="text" id="name" name="name" required>
+                        <span class="error-message" id="nameError">Пожалуйста, введите имя</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="childName">Имя и возраст ребенка *</label>
+                        <input type="text" id="childName" name="childName" required>
+                        <span class="error-message" id="childNameError">Пожалуйста, введите имя и возраст ребенка</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                        <span class="error-message" id="phoneError">Пожалуйста, введите корректный номер телефона</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+                        <span class="error-message" id="emailError">Пожалуйста, введите корректный email</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Комментарий</label>
+                        <textarea id="message" name="message" rows="4"></textarea>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        <label for="consent">Я согласен на обработку персональных данных *</label>
+                    </div>
+                    <span class="error-message" id="consentError">Необходимо согласие на обработку данных</span>
+                    <button type="submit" class="btn">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 class="section-title">Часто задаваемые вопросы</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">С какого возраста можно начинать занятия?</div>
+                    <div class="faq-answer">
+                        <p>Мы принимаем детей с 6 лет. Для каждого возраста разработана своя программа с учетом особенностей восприятия и интересов.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Нужен ли собственный компьютер?</div>
+                    <div class="faq-answer">
+                        <p>Нет, все необходимое оборудование предоставляется клубом. У нас современные компьютеры, роботы и 3D-принтеры.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Сколько длится пробное занятие?</div>
+                    <div class="faq-answer">
+                        <p>Пробное занятие длится 60 минут. За это время ребенок познакомится с преподавателем, попробует работать с оборудованием и создаст свой первый проект.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Какие направления доступны?</div>
+                    <div class="faq-answer">
+                        <p>Мы предлагаем программирование (Python, JavaScript), робототехнику (LEGO, Arduino), 3D-моделирование (Blender, Tinkercad), веб-разработку и создание мобильных приложений.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Сколько стоит обучение?</div>
+                    <div class="faq-answer">
+                        <p>Стоимость зависит от выбранного направления и формата занятий. Пробное занятие бесплатное. Оставьте заявку, и мы расскажем о всех вариантах.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>КодКидс</h3>
+                    <p>Клуб программирования, робототехники и 3D-моделирования для детей 6-17 лет</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p>📞 +7 (999) 123-45-67</p>
+                    <p>✉️ info@codekids.ru</p>
+                    <p>📍 г. Москва, ул. Примерная, д. 1</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Режим работы</h3>
+                    <p>Пн-Пт: 10:00 - 20:00</p>
+                    <p>Сб-Вс: 10:00 - 18:00</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 КодКидс. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Scroll to form
+        function scrollToForm() {
+            document.getElementById('form').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Form validation
+        const form = document.getElementById('contactForm');
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            let isValid = true;
+            
+            // Reset errors
+            document.querySelectorAll('.error-message').forEach(msg => {
+                msg.style.display = 'none';
+            });
+            document.querySelectorAll('input, textarea').forEach(input => {
+                input.classList.remove('error');
+            });
+            
+            // Validate name
+            const name = document.getElementById('name');
+            if (!name.value.trim()) {
+                showError('name', 'nameError');
+                isValid = false;
+            }
+            
+            // Validate child name
+            const childName = document.getElementById('childName');
+            if (!childName.value.trim()) {
+                showError('childName', 'childNameError');
+                isValid = false;
+            }
+            
+            // Validate phone
+            const phone = document.getElementById('phone');
+            const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+            if (!phone.value.trim() || !phoneRegex.test(phone.value)) {
+                showError('phone', 'phoneError');
+                isValid = false;
+            }
+            
+            // Validate email (optional but must be valid if provided)
+            const email = document.getElementById('email');
+            if (email.value.trim()) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email.value)) {
+                    showError('email', 'emailError');
+                    isValid = false;
+                }
+            }
+            
+            // Validate consent
+            const consent = document.getElementById('consent');
+            if (!consent.checked) {
+                document.getElementById('consentError').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+                form.reset();
+            }
+        });
+        
+        function showError(inputId, errorId) {
+            document.getElementById(inputId).classList.add('error');
+            document.getElementById(errorId).style.display = 'block';
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
